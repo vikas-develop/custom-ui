@@ -1,6 +1,12 @@
 [build]
+<<<<<<< HEAD
   command = "npm install && USE_LOCAL=false npm run build"
   publish = "dist"
+=======
+  base = "demo"
+  command = "npm install && USE_LOCAL=false npm run build"
+  publish = "demo/dist"
+>>>>>>> 734eae0baac5874df496636d94e71220258bc8ca
 
 [build.environment]
   NODE_VERSION = "18"
