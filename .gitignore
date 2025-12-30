@@ -8,7 +8,10 @@ dist/
 # Example app (excluded from library repo)
 example-app/
 demo-app/
-demo/
+# Allow demo/ but ignore its build artifacts
+demo/node_modules/
+demo/dist/
+demo/package-lock.json
 # IDE
 .vscode/
 .idea/
