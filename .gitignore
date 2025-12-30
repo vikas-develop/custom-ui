@@ -3,11 +3,10 @@ node_modules/
 package-lock.json
 
 # Build output
-packages/*/dist/
-apps/*/dist/
+dist/
 
-# Root node_modules
-node_modules/
+# Example app (excluded from library repo)
+example-app/
 
 # IDE
 .vscode/
