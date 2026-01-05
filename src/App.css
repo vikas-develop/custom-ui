@@ -6,13 +6,18 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Sidebar scrollbar styling */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -24,3 +29,495 @@ html {
   background: #555;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Grid pattern background */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.dark .bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rotate-in {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes rotate-out {
+  from {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-fade-in-delay {
+  animation: fade-in 0.6s ease-out 0.2s both;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fade-in 0.6s ease-out 0.4s both;
+}
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Theme toggle switch - ultra smooth like toggles.dev */
+.theme-toggle {
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+  transition: background 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+}
+
+.theme-toggle:hover::before {
+  opacity: 1;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.05) translateZ(0);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-toggle:active {
+  transform: scale(0.98) translateZ(0);
+}
+
+.theme-toggle-thumb {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.theme-toggle-thumb.toggle-off {
+  transform: translateX(0) translateZ(0);
+}
+
+.theme-toggle-thumb.toggle-on {
+  transform: translateX(1.75rem) translateZ(0);
+}
+
+/* Icon animations - ultra smooth */
+.theme-toggle-sun,
+.theme-toggle-moon {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: opacity, transform;
+  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-toggle-sun.sun-visible {
+  opacity: 1;
+  transform: rotate(0deg) scale(1) translateZ(0);
+}
+
+.theme-toggle-sun.sun-hidden {
+  opacity: 0;
+  transform: rotate(180deg) scale(0.3) translateZ(0);
+  pointer-events: none;
+}
+
+.theme-toggle-moon.moon-visible {
+  opacity: 1;
+  transform: rotate(0deg) scale(1) translateZ(0);
+}
+
+.theme-toggle-moon.moon-hidden {
+  opacity: 0;
+  transform: rotate(-180deg) scale(0.3) translateZ(0);
+  pointer-events: none;
+}
+
+/* Focus styles */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Component section spacing */
+section[id^="component-"] {
+  scroll-margin-top: 6rem;
+}
+
+/* Override hardcoded white backgrounds in demo components for dark mode */
+.dark [id^="component-"] {
+  background-color: transparent !important;
+}
+
+.dark [id^="component-"] h2 {
+  color: hsl(var(--foreground)) !important;
+}
+
+.dark [id^="component-"] h3 {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* Target inline styles with attribute selectors - more specific approach */
+.dark main [style*="background-color: #fff"],
+.dark main [style*="background-color:#fff"],
+.dark main [style*="backgroundColor: '#fff'"],
+.dark main [style*="backgroundColor: \"#fff\""] {
+  background-color: transparent !important;
+}
+
+.dark main [style*="color: #333"],
+.dark main [style*="color:#333"],
+.dark main [style*="color: '#333'"],
+.dark main [style*="color: \"#333\""] {
+  color: #e5e7eb !important;
+}
+
+.dark main [style*="boxShadow"] {
+  box-shadow: none !important;
+}
+
+/* Input elements - base styling (light mode) */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+textarea,
+select {
+  background-color: #fff !important;
+  color: hsl(var(--text-primary)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+/* Autocomplete and dropdown menus - dynamic backgrounds */
+ul[style*="backgroundColor: '#fff'"],
+ul[style*="background-color: #fff"],
+ul[style*="background-color:#fff"],
+div[style*="backgroundColor: '#fff'"],
+div[style*="background-color: #fff"],
+div[style*="background-color:#fff"] {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+.dark ul[style*="backgroundColor: '#fff'"],
+.dark ul[style*="background-color: #fff"],
+.dark ul[style*="background-color:#fff"],
+.dark div[style*="backgroundColor: '#fff'"],
+.dark div[style*="background-color: #fff"],
+.dark div[style*="background-color:#fff"] {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+/* Dropdown list items */
+.dark li[style*="backgroundColor"],
+.dark li[style*="background-color"] {
+  color: hsl(var(--foreground)) !important;
+}
+
+.dark li[style*="backgroundColor: '#f0f0f0'"],
+.dark li[style*="background-color: #f0f0f0"],
+.dark li[style*="background-color:#f0f0f0"] {
+  background-color: hsl(var(--accent)) !important;
+}
+
+/* Dark mode input styling */
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark input[type="number"],
+.dark input[type="date"],
+.dark input[type="time"],
+.dark input[type="tel"],
+.dark input[type="url"],
+.dark input[type="search"],
+.dark textarea,
+.dark select {
+  background-color: hsl(var(--input)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  border-color: hsl(var(--ring)) !important;
+  outline: none !important;
+}
+
+/* Autocomplete input field - ensure it has background */
+.autocomplete input,
+.autocomplete input[type="text"] {
+  background-color: hsl(var(--input)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+.dark .autocomplete input,
+.dark .autocomplete input[type="text"] {
+  background-color: hsl(var(--input)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+/* Override any input that doesn't have explicit background */
+input:not([style*="background"]):not([style*="backgroundColor"]) {
+  background-color: hsl(var(--input)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.dark input:not([style*="background"]):not([style*="backgroundColor"]) {
+  background-color: hsl(var(--input)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Card component dark mode styling */
+.dark [style*="backgroundColor: '#fff'"]:has(> div[style*="borderBottom"]),
+.dark [style*="background-color: #fff"]:has(> div[style*="borderBottom"]),
+.dark [style*="background-color:#fff"]:has(> div[style*="borderBottom"]) {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+.dark [style*="backgroundColor: '#f8f9fa'"],
+.dark [style*="background-color: #f8f9fa"],
+.dark [style*="background-color:#f8f9fa"] {
+  background-color: hsl(var(--muted)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Modal component dark mode styling */
+.dark [style*="backgroundColor: 'white'"],
+.dark [style*="background-color: white"],
+.dark [style*="background-color:white"] {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.dark [style*="backgroundColor: 'white'"] h2,
+.dark [style*="background-color: white"] h2,
+.dark [style*="background-color:white"] h2 {
+  color: hsl(var(--foreground)) !important;
+}
+
+.dark [style*="color: #6c757d"] {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+/* Accordion component dark mode styling */
+.dark .accordion-header,
+.dark button[style*="backgroundColor: '#f9f9f9'"],
+.dark button[style*="background-color: #f9f9f9"],
+.dark button[style*="background-color:#f9f9f9"] {
+  background-color: hsl(var(--muted)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+.dark .accordion-header:hover,
+.dark button[style*="backgroundColor: '#f0f0f0'"],
+.dark button[style*="background-color: #f0f0f0"],
+.dark button[style*="background-color:#f0f0f0"] {
+  background-color: hsl(var(--accent)) !important;
+}
+
+.dark .accordion-content,
+.dark [style*="backgroundColor: '#fff'"]:has(+ .accordion-content),
+.dark [style*="background-color: #fff"]:has(+ .accordion-content) {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+/* Override borders in dark mode for Card, Modal, Accordion */
+.dark [style*="border: 1px solid #e0e0e0"],
+.dark [style*="border:1px solid #e0e0e0"],
+.dark [style*="borderBottom: '1px solid #e0e0e0'"],
+.dark [style*="borderTop: '1px solid #e0e0e0'"],
+.dark [style*="borderBottom: 1px solid #e0e0e0"],
+.dark [style*="borderTop: 1px solid #e0e0e0"] {
+  border-color: hsl(var(--border)) !important;
+}
+
+/* Accordion content specific styling */
+.dark .accordion-content[style*="backgroundColor: '#fff'"],
+.dark .accordion-content[style*="background-color: #fff"],
+.dark .accordion-content[style*="background-color:#fff"] {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--foreground)) !important;
+  border-color: hsl(var(--border)) !important;
+}
+
+/* Card footer styling */
+.dark [style*="backgroundColor: '#f8f9fa'"],
+.dark [style*="background-color: #f8f9fa"],
+.dark [style*="background-color:#f8f9fa"] {
+  background-color: hsl(var(--muted)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Modal close button */
+.dark [style*="color: #6c757d"] {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.dark [style*="color: #6c757d"]:hover {
+  color: hsl(var(--foreground)) !important;
+}
+
+input[type="text"]:disabled,
+input[type="email"]:disabled,
+input[type="password"]:disabled,
+input[type="number"]:disabled,
+input[type="date"]:disabled,
+input[type="time"]:disabled,
+textarea:disabled,
+select:disabled {
+  background-color: hsl(var(--muted)) !important;
+  color: hsl(var(--muted-foreground)) !important;
+  cursor: not-allowed !important;
+  opacity: 0.6 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: hsl(var(--muted-foreground)) !important;
+  opacity: 0.7;
+}
+
+/* Label colors - dynamic */
+label {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Helper text and error text - dynamic colors */
+[style*="color: #6c757d"],
+[style*="color:#6c757d"],
+[style*="color: '#6c757d'"],
+[style*="color: \"#6c757d\""] {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+[style*="color: #666"],
+[style*="color:#666"],
+[style*="color: '#666'"],
+[style*="color: \"#666\""] {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+[style*="color: #495057"],
+[style*="color:#495057"],
+[style*="color: '#495057'"],
+[style*="color: \"#495057\""] {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Override hardcoded white backgrounds in demo components for dark mode */
+.dark [style*="background-color: #fff"],
+.dark [style*="background-color:#fff"],
+.dark [style*="backgroundColor: '#fff'"] {
+  background-color: transparent !important;
+}
+
+/* Override hardcoded dark text colors - use dynamic foreground */
+[style*="color: #333"],
+[style*="color:#333"],
+[style*="color: '#333'"],
+[style*="color: \"#333\""] {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* Override box shadows in dark mode */
+.dark [style*="boxShadow"] {
+  box-shadow: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  aside {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  aside.open {
+    transform: translateX(0);
+  }
+  
+  main {
+    margin-left: 0 !important;
+  }
+}

@@ -40,4 +40,7 @@ export { TextareaDemo } from './TextareaDemo.jsx';
 export { TimeInputDemo } from './TimeInputDemo.jsx';
 export { TooltipDemo } from './TooltipDemo.jsx';
 export { UserDemo } from './UserDemo.jsx';
+export { LandingPage } from './LandingPage.jsx';
+export { ComponentsPage } from './ComponentsPage.jsx';
+export { Navbar } from './Navbar.jsx';
 

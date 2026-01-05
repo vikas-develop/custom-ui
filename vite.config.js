@@ -8,11 +8,14 @@ const useLocalSource = process.env.USE_LOCAL !== 'false';
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: useLocalSource
-      ? {
-          '@vk-develop/custom-ui': path.resolve(__dirname, '../src/index.js'),
-        }
-      : {},
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      ...(useLocalSource
+        ? {
+            '@vk-develop/custom-ui': path.resolve(__dirname, '../src/index.js'),
+          }
+        : {}),
+    },
   },
 });
 
